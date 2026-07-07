@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Applies</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="/css/social-widget.css" rel="stylesheet" >
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      body {
+        background: #f7f7f5;
+        color: #222;
+      }
+
+      .page-shell {
+        max-width: 1040px;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 460px);
+        justify-content: center;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 900px) {
+        .content-grid {
+          grid-template-columns: repeat(2, 460px);
+          column-gap: 3rem;
+          align-items: start;
+        }
+      }
+
+      .content-column {
+        display: grid;
+        gap: 1rem;
+        min-width: 0;
+      }
+
+      .content-block {
+        background: #fff;
+        border: 1px solid #deded8;
+        border-radius: 6px;
+        padding: 1rem;
+      }
+
+      .content-block.image-only {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .content-block img,
+      img.content-image {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .load-error {
+        border-color: #c63f3f;
+        color: #8a2020;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell container py-4 py-md-5">
+      <header class="mb-4">
+        <h1 class="h3 mb-1">Applies</h1>
+        <p class="text-secondary mb-0">A simple two-column page for collected pieces.</p>
+      </header>
+
+      <div class="content-grid">
+        <!--
+          LEFT COLUMN CONTENT
+          Add, remove, or reorder files in data-content-files.
+          Each file is loaded from this repo, so it works on GitHub Pages.
+          Example: data-content-files="content/left/01-intro.html content/left/new-piece.html"
+        -->
+        <section class="content-column" aria-label="Left column" data-content-files="
+          content/left/01-intro.html
+          content/left/02-image.html
+        "></section>
+
+        <!--
+          RIGHT COLUMN CONTENT
+          Drop new HTML snippets into content/right/ and list them below.
+          Image-only snippets are fine; see content/right/01-image.html.
+        -->
+        <section class="content-column" aria-label="Right column" data-content-files="
+          content/right/01-image.html
+          content/right/02-note.html
+        "></section>
+      </div>
+    </main>
+
+    <script>
+      async function loadContentBlocks() {
+        const columns = document.querySelectorAll("[data-content-files]");
+
+        await Promise.all(Array.from(columns).map(async (column) => {
+          const files = column.dataset.contentFiles.trim().split(/\s+/).filter(Boolean);
+
+          for (const file of files) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "content-block";
+
+            try {
+              const response = await fetch(file);
+
+              if (!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+              }
+
+              wrapper.innerHTML = await response.text();
+
+              if (wrapper.children.length === 1 && wrapper.firstElementChild.tagName === "IMG") {
+                wrapper.classList.add("image-only");
+              }
+            } catch (error) {
+              wrapper.classList.add("load-error");
+              wrapper.textContent = `Could not load ${file}`;
+              console.error(error);
+            }
+
+            column.appendChild(wrapper);
+          }
+        }));
+      }
+
+      loadContentBlocks();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
