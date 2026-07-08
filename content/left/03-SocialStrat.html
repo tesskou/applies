@@ -1,0 +1,140 @@
+<!-- SVG icon library -->
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="icon-user" viewBox="0 0 24 24">
+      <circle cx="12" cy="8" r="3.2"></circle>
+      <path d="M5.5 20a6.5 6.5 0 0 1 13 0"></path>
+    </symbol>
+
+    <symbol id="icon-more" viewBox="0 0 24 24">
+      <circle cx="6" cy="12" r="1.2"></circle>
+      <circle cx="12" cy="12" r="1.2"></circle>
+      <circle cx="18" cy="12" r="1.2"></circle>
+    </symbol>
+
+    <symbol id="icon-image" viewBox="0 0 24 24">
+      <rect x="3" y="4" width="18" height="16" rx="2.5"></rect>
+      <circle cx="16.5" cy="8.5" r="1.1"></circle>
+      <path d="M4 17l5.5-5.5 4.2 4.2 2.1-2.1L21 18"></path>
+    </symbol>
+
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path d="M20.8 4.6c-2-2-5.2-1.8-6.9.4L12 7.4 10.1 5C8.4 2.8 5.2 2.6 3.2 4.6c-2.2 2.2-2 5.8.3 7.9L12 20l8.5-7.5c2.3-2.1 2.5-5.7.3-7.9z"></path>
+    </symbol>
+
+    <symbol id="icon-comment" viewBox="0 0 24 24">
+      <path d="M21 11.5a8.4 8.4 0 0 1-8.7 8.2 9.3 9.3 0 0 1-4.2-1L3 20l1.4-4.5A7.9 7.9 0 0 1 3 11.5a8.4 8.4 0 0 1 9-8.2 8.4 8.4 0 0 1 9 8.2z"></path>
+    </symbol>
+
+    <symbol id="icon-repost" viewBox="0 0 24 24">
+	  <!-- Top/right arrow -->
+	  <path
+		d="M8.5 5.5H14a5.5 5.5 0 0 1 5.5 5.5v5"
+		stroke="currentColor"
+		stroke-width="2.8"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		fill="none"
+	  />
+
+	  <!-- Down arrow head -->
+	  <path
+		d="M16.5 13l3 3 3-3"
+		stroke="currentColor"
+		stroke-width="2.8"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		fill="none"
+	  />
+
+	  <!-- Bottom/left arrow -->
+	  <path
+		d="M15.5 18.5H10a5.5 5.5 0 0 1-5.5-5.5V8"
+		stroke="currentColor"
+		stroke-width="2.8"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		fill="none"
+	  />
+
+	  <!-- Up arrow head -->
+	  <path
+		d="M1.5 11l3-3 3 3"
+		stroke="currentColor"
+		stroke-width="2.8"
+		stroke-linecap="round"
+		stroke-linejoin="round"
+		fill="none"
+	  />
+	</symbol>
+
+    <symbol id="icon-send" viewBox="0 0 24 24">
+      <path d="M22 2L11 13"></path>
+      <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+    </symbol>
+
+    <symbol id="icon-bookmark" viewBox="0 0 24 24">
+      <path d="M6 3h12a1 1 0 0 1 1 1v17l-7-4-7 4V4a1 1 0 0 1 1-1z"></path>
+    </symbol>
+  </svg>
+
+  <main class="feed social-feed-mock">
+    <article class="post-card">
+      <header class="post-header">
+        <div class="avatar">
+		  <!-- INSERT PROFILE IMAGE URL HERE -->
+		  <img src="/applies/img/53809440_10156445080527734_1376536674770616320_n.jpg" alt="Profile image" />
+		</div>
+
+        <div class="username">tesskou</div>
+
+        <div class="header-spacer"></div>
+
+        <button class="icon-button" aria-label="More options">
+          <svg class="small-svg"><use href="#icon-more"></use></svg>
+        </button>
+      </header>
+
+      <section
+        class="post-media"
+        style="--post-image: url('/applies/img/2socialstrat.jpg');"
+      >
+      </section>
+
+      <footer class="post-footer">
+        <div class="actions-row">
+          <a class="action" href="#" aria-label="Like">
+            <svg><use href="#icon-heart"></use></svg>
+            <span>37</span>
+          </a>
+
+          <a class="action" href="#" aria-label="Comment">
+            <svg><use href="#icon-comment"></use></svg>
+            <span>16</span>
+          </a>
+
+          <a class="action" href="#" aria-label="Repost">
+            <svg><use href="#icon-repost"></use></svg>
+            <span>4</span>
+          </a>
+
+          <a class="action" href="#" aria-label="Send">
+            <svg><use href="#icon-send"></use></svg>
+            <span>3</span>
+          </a>
+
+          <a class="action bookmark" href="#" aria-label="Save">
+            <svg><use href="#icon-bookmark"></use></svg>
+          </a>
+        </div>
+
+        <p class="caption">
+          <strong>tesskou</strong>
+          I contributed to the development and implementation of ScienceAlert’s social media strategy. This directed traffic back to the news site and helped grow ScienceAlert’s Instagram audience to almost 1 million followers.
+          <a href="#">#scicom</a>
+          <a href="#">@ecolsocaus</a>
+        </p>
+
+        <div class="timestamp">2 hours ago</div>
+      </footer>
+    </article>
+  </main>
