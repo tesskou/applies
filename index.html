@@ -129,6 +129,39 @@ ESA social media has the potential to further nurture a sense of community betwe
     </main>
 
     <script>
+      function setStackedBlockHeights() {
+        const blocks = Array.from(document.querySelectorAll(
+          ".content-column > .content-block"
+        ));
+
+        if (!blocks.length) {
+          return;
+        }
+
+        // Clear the previous value first so responsive changes are measured naturally.
+        blocks.forEach((block) => {
+          block.style.height = "";
+        });
+
+        const maxHeight = Math.ceil(Math.max(
+          ...blocks.map((block) => block.getBoundingClientRect().height)
+        ));
+
+        blocks.forEach((block) => {
+          block.style.height = `${maxHeight}px`;
+        });
+      }
+
+      function waitForCardImages() {
+        const pendingImages = Array.from(document.querySelectorAll(".post-card img"))
+          .filter((image) => !image.complete);
+
+        return Promise.all(pendingImages.map((image) => new Promise((resolve) => {
+          image.addEventListener("load", resolve, { once: true });
+          image.addEventListener("error", resolve, { once: true });
+        })));
+      }
+
       async function loadContentBlocks() {
         const columns = document.querySelectorAll("[data-content-files]");
 
@@ -160,9 +193,23 @@ ESA social media has the potential to further nurture a sense of community betwe
             column.appendChild(wrapper);
           }
         }));
+
+        await Promise.all([
+          waitForCardImages(),
+          document.fonts?.ready ?? Promise.resolve()
+        ]);
+
+        setStackedBlockHeights();
       }
 
       loadContentBlocks();
+
+      let resizeFrame;
+
+      window.addEventListener("resize", () => {
+        window.cancelAnimationFrame(resizeFrame);
+        resizeFrame = window.requestAnimationFrame(setStackedBlockHeights);
+      });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   </body>
