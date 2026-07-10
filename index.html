@@ -43,14 +43,82 @@
       }
 
       .content-block {
-        background: #fff;
-        border: 1px solid #deded8;
-        border-radius: 6px;
+        --segment-bg: #fffdfb;
+        --segment-border: #e8ded7;
+        --segment-accent: #d8b8a3;
+        background: var(--segment-bg);
+        border: 1px solid var(--segment-border);
+        border-top: 4px solid var(--segment-accent);
+        border-radius: 10px;
         padding: 1rem;
+        box-shadow: 0 10px 24px rgba(63, 52, 45, 0.08);
+      }
+
+      [aria-label="Left column"] > .content-block:nth-child(1) {
+        --segment-bg: #fff7fa;
+        --segment-border: #f0d4df;
+        --segment-accent: #dda2b8;
+      }
+
+      [aria-label="Left column"] > .content-block:nth-child(2) {
+        --segment-bg: #fff9f2;
+        --segment-border: #efddc6;
+        --segment-accent: #ddb887;
+      }
+
+      [aria-label="Left column"] > .content-block:nth-child(3) {
+        --segment-bg: #f3f9fd;
+        --segment-border: #cfe1ed;
+        --segment-accent: #8ebbd4;
+      }
+
+      [aria-label="Left column"] > .content-block:nth-child(4) {
+        --segment-bg: #f4faf5;
+        --segment-border: #d0e4d3;
+        --segment-accent: #92bd99;
+      }
+
+      [aria-label="Left column"] > .content-block:nth-child(5) {
+        --segment-bg: #f8f5fd;
+        --segment-border: #ded4ee;
+        --segment-accent: #ad96cf;
+      }
+
+      [aria-label="Right column"] > .content-block:nth-child(1) {
+        --segment-bg: #f3f8ff;
+        --segment-border: #cfdeef;
+        --segment-accent: #8cafd4;
+      }
+
+      [aria-label="Right column"] > .content-block:nth-child(2) {
+        --segment-bg: #faf5ff;
+        --segment-border: #e3d4ef;
+        --segment-accent: #ba96d2;
+      }
+
+      [aria-label="Right column"] > .content-block:nth-child(3) {
+        --segment-bg: #fff6f3;
+        --segment-border: #efd5cb;
+        --segment-accent: #dca18f;
+      }
+
+      [aria-label="Right column"] > .content-block:nth-child(4) {
+        --segment-bg: #fffbed;
+        --segment-border: #eadfb6;
+        --segment-accent: #cdb35d;
+      }
+
+      [aria-label="Right column"] > .content-block:nth-child(5) {
+        --segment-bg: #f4faf8;
+        --segment-border: #cee4dc;
+        --segment-accent: #83b7a5;
       }
 
       .closing-block {
         grid-column: 1 / -1;
+        --segment-border: #d9d9e8;
+        --segment-accent: #a79bc9;
+        background: linear-gradient(135deg, #fff9f2 0%, #f3faf7 52%, #f8f4ff 100%);
       }
 
       .closing-block p + p {
