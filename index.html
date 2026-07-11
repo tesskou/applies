@@ -30,7 +30,7 @@
 
       @media (min-width: 900px) {
         .content-grid {
-          grid-template-columns: repeat(2, 460px);
+          grid-template-columns: repeat(2, var(--post-size));
           column-gap: 3rem;
           align-items: start;
         }
@@ -42,19 +42,55 @@
         min-width: 0;
       }
 
+      .content-segment {
+        min-width: 0;
+      }
+
+      .content-segment > .social-feed-mock {
+        width: 100%;
+        padding: 0;
+      }
+
+      .content-segment > .social-feed-mock > p {
+        width: min(100%, var(--post-size));
+        margin: 0 auto;
+        padding: 1rem;
+        background: #fff;
+        border-radius: 6px;
+      }
+
+      .content-segment > .social-feed-mock > p:has(+ .post-card) {
+        border-radius: 6px 6px 0 0;
+      }
+
+      .content-segment > .social-feed-mock > p + .post-card {
+        border-top: 0;
+        border-radius: 0 0 8px 8px;
+      }
+
       .content-block {
         background: #fff;
-        border: 1px solid #deded8;
         border-radius: 6px;
         padding: 1rem;
       }
 
       .closing-block {
         grid-column: 1 / -1;
+        width: 100%;
+        max-width: calc(var(--post-size) + var(--post-size) + 3rem);
+        justify-self: center;
       }
 
       .closing-block p + p {
         margin-top: 1rem;
+      }
+
+      .bottom-content {
+        grid-column: 1 / -1;
+        display: grid;
+        width: min(100%, var(--post-size));
+        justify-self: center;
+        gap: 1rem;
       }
 
       .content-block.image-only {
@@ -79,7 +115,7 @@
     <main class="page-shell container py-4 py-md-5">
       <header class="mb-4">
         <h1 class="text-center h2 mb-1">Application for Ecological Society of Australia's Social Media Officer</h1>
-        <p class="text-center text-secondary mb-0">Tessa Koumoundouros | tesskou@proton.me | <a href="https://bsky.app/profile/tesskou.bsky.social" target="_blank">@tesskou.bsky.social</a></p>
+        <p class="text-center text-secondary mb-0">Tessa Koumoundouros | <a href="mailto:tesskou@proton.me">tesskou@proton.me</a> | <a href="https://bsky.app/profile/tesskou.bsky.social" target="_blank">@tesskou.bsky.social</a></p>
       </header>
 
       <div class="content-grid">
@@ -126,6 +162,10 @@ ESA social media has the potential to further nurture a sense of community betwe
           Given my passion for environmental sciences, I'd be utterly thrilled for an opportunity to support ecologists and their work. I look forward to hearing your response.
         </p>
         </div>
+
+        <section class="bottom-content" aria-label="Bottom content" data-content-files="
+          content/bottom/11-EcologyBites.html
+        "></section>
       </div>
     </main>
 
@@ -138,10 +178,10 @@ ESA social media has the potential to further nurture a sense of community betwe
 
           for (const file of files) {
             const wrapper = document.createElement("div");
-            wrapper.className = "content-block";
+            wrapper.className = "content-segment";
 
             try {
-              const response = await fetch(file);
+              const response = await fetch(file, { cache: "no-store" });
 
               if (!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`);
@@ -149,11 +189,8 @@ ESA social media has the potential to further nurture a sense of community betwe
 
               wrapper.innerHTML = await response.text();
 
-              if (wrapper.children.length === 1 && wrapper.firstElementChild.tagName === "IMG") {
-                wrapper.classList.add("image-only");
-              }
             } catch (error) {
-              wrapper.classList.add("load-error");
+              wrapper.classList.add("content-block", "load-error");
               wrapper.textContent = `Could not load ${file}`;
               console.error(error);
             }

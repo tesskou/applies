@@ -4,9 +4,11 @@ This site is plain static HTML and is ready for GitHub Pages.
 
 ## Add a new item
 
-1. Create a new `.html` file in `content/left/` or `content/right/`.
+1. Create a new `.html` file in `content/left/`, `content/right/`, or `content/bottom/`.
 2. Put only the content for that block in the file, not a full HTML document.
 3. Add the file path to the matching `data-content-files` list in `index.html`.
+
+Files listed in the bottom content section render as centered cards below the closing text.
 
 Example:
 
